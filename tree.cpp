@@ -38,6 +38,7 @@ std::map <char,std::string> Tree::mapKeys(std::string path) {
         sourceMap = left->mapKeys(newPath);
         targetMap.insert(sourceMap.begin(),sourceMap.end());
     }
+
     sourceMap.erase(sourceMap.begin(),sourceMap.end());
 
     if (right != nullptr) {

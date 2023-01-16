@@ -27,7 +27,7 @@ void Hauffman::importFile(char * path) {
 void Hauffman::exportFile(char * path) {
     std::ofstream file;
     file.open (path, std::ios::binary);
-    file << this->header + "\n\n\n";
+    file << this->header;
     file << this->fileContent;
     file.close();
     getFileSize(path,&outputFileSize);
@@ -89,6 +89,7 @@ void Hauffman::compress() {
         this->header.push_back(i.first);
         this->header += ":" + i.second + "\n";
     }
+    header += "\n\n\n";
 
     delete trees[0];
 
@@ -102,7 +103,7 @@ void Hauffman::decompress() {
     std::string line;
 
     header = fileContent.substr(0,fileContent.find("\n\n\n"));
-    fileContent = fileContent.substr(fileContent.find("\n\n\n") + 4, fileContent.size());
+    fileContent = fileContent.substr(fileContent.find("\n\n\n") + 4, fileContent.size()-fileContent.find("\n\n\n"));
 
     ss.str(header);
 
